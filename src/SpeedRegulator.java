@@ -1,3 +1,4 @@
+import lejos.hardware.Sound;
 import lejos.hardware.lcd.LCD;
 
 public class SpeedRegulator extends Thread {
@@ -14,16 +15,24 @@ public class SpeedRegulator extends Thread {
 	
 	public void run() {
 		
-		synchronized(roadIsBumpy) {
-			
-			robot.lowerSpeed();
-			LCD.drawString("SLOW DOWN!! you ass", 0, 4);
-			try{Thread.sleep(3000);}catch(Exception e){e.printStackTrace();}
-			robot.normalSpeed();
-			roadIsBumpy = false;
-			
+		while (robot.isWorking) {
+			synchronized(roadIsBumpy) {	
+				/*System.out.println(roadIsBumpy.compareTo(Boolean.TRUE));
+				if (roadIsBumpy.compareTo(Boolean.TRUE) == 0) {
+					Sound.twoBeeps();
+					robot.lowerSpeed();
+					LCD.drawString("SLOW DOWN!! you ass", 0, 4);
+					try{Thread.sleep(3000);}catch(Exception e){e.printStackTrace();}
+					robot.normalSpeed();
+					roadIsBumpy = false;
+				}*/
+				if (roadIsBumpy.compareTo(Boolean.TRUE) == 0 && !robot.isLowerSpeed()) {
+					robot.lowerSpeed();
+				} else if (roadIsBumpy.compareTo(Boolean.TRUE) != 0) {
+					robot.normalSpeed();
+				}
+			}
 		}
-		
 	}
 	
 }
