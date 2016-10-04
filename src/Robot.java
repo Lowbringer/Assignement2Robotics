@@ -30,7 +30,14 @@ public class Robot {
 	
 	public void movePilotMethod() {
 		
-		Wheel wheelL = WheeledChassis.modelWheel(Motor.A, 43).offset(-60);
+		Motor.A.setAcceleration(300);
+		Motor.B.setAcceleration(300);
+		Motor.A.setSpeed(300);
+		Motor.B.setSpeed(300);
+		
+		Motor.A.forward();
+		Motor.B.forward();
+		/*Wheel wheelL = WheeledChassis.modelWheel(Motor.A, 43).offset(-60);
 		Wheel wheelR = WheeledChassis.modelWheel(Motor.B, 43).offset(60);
 	
 		Chassis chassis = new WheeledChassis(new Wheel[] { wheelL, wheelR }, WheeledChassis.TYPE_DIFFERENTIAL);
@@ -51,20 +58,20 @@ public class Robot {
 		pilot.rotate(80);
 		pilot.travel(400);
 		pilot.arc(200, 90);*/
-		/*try {
-			Thread.sleep(2000);
+		try {
+			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}/*
 		
 		
-		pilot.travel(1000);*/
+		pilot.travel(1000);
 		lowerSpeed();
 		
 		//pilot.travel(-80);  			// move backward 
 		//pilot.rotate(-13);        	// degree 
-		pilot.stop();  
+		pilot.stop();  */
 		isWorking = false;
 		  	
 }
@@ -74,16 +81,24 @@ public class Robot {
 	public void lowerSpeed() {
 		if (pilot != null) {
 			lowerSpeed = true;
-			pilot.setAngularSpeed(25);
-			pilot.setLinearSpeed(40);
+			Motor.A.setAcceleration(100);
+			Motor.B.setAcceleration(100);
+			Motor.A.setSpeed(100);
+			Motor.B.setSpeed(100);
+			//pilot.setAngularSpeed(25);
+			//pilot.setLinearSpeed(40);
 		}
 	}
 	
 	public void normalSpeed() {
 		if (pilot != null) {
 			lowerSpeed = false;
-			pilot.setAngularSpeed(100);
-			pilot.setLinearSpeed(160);
+			Motor.A.setAcceleration(300);
+			Motor.B.setAcceleration(300);
+			Motor.A.setSpeed(300);
+			Motor.B.setSpeed(300);
+			//pilot.setAngularSpeed(100);
+			//pilot.setLinearSpeed(160);
 		}
 	}
 	

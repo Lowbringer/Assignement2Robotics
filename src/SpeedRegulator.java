@@ -1,5 +1,6 @@
 import lejos.hardware.Sound;
 import lejos.hardware.lcd.LCD;
+import lejos.hardware.motor.Motor;
 
 public class SpeedRegulator extends Thread {
 
@@ -27,9 +28,17 @@ public class SpeedRegulator extends Thread {
 					roadIsBumpy = false;
 				}*/
 				if (roadIsBumpy.compareTo(Boolean.TRUE) == 0 && !robot.isLowerSpeed()) {
-					robot.lowerSpeed();
+					Motor.A.setAcceleration(100);
+					Motor.B.setAcceleration(100);
+					Motor.A.setSpeed(100);
+					Motor.B.setSpeed(100);
+					//robot.lowerSpeed();
 				} else if (roadIsBumpy.compareTo(Boolean.TRUE) != 0) {
-					robot.normalSpeed();
+					Motor.A.setAcceleration(300);
+					Motor.B.setAcceleration(300);
+					Motor.A.setSpeed(300);
+					Motor.B.setSpeed(300);
+					//robot.normalSpeed();
 				}
 			}
 		}

@@ -32,6 +32,7 @@ public class SensorReader extends Thread {
 		
 		while (r.isWorking) {
 			
+			
 			float[] sample = new float[provider.sampleSize()];
 			provider.fetchSample(sample, 0);
 			if (sample[0] > 0.5) {
@@ -44,11 +45,13 @@ public class SensorReader extends Thread {
 				if (date.getTime() - touchInfos.get(4) < 3000
 						&& touchInfos.get(4) - touchInfos.get(0) < 2000) {
 					synchronized(roadIsBumpy) {
+						Sound.beep();
 						roadIsBumpy = Boolean.TRUE;
 					};
 					
 				} else {
 					synchronized(roadIsBumpy) {
+						
 						roadIsBumpy = Boolean.FALSE;
 					};
 				}
